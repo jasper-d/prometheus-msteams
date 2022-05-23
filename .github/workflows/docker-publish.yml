@@ -82,12 +82,13 @@ jobs:
       - name: Print stuff
         run: |
           echo ${{ steps.build-and-push.outputs.digest }}
+          echo ${{ steps.build-and-push.outputs.metadata.image.name }}
           docker image ls --digests
 
       - name: Container image scan
         uses: Azure/container-scan@v0.1
         with:
-          image-name: ${{ steps.build-and-push.outputs.image.name }}
+          image-name: ${{ steps.build-and-push.outputs.metadata.image.name }}
           severity-threshold: LOW
 
       # Sign the resulting Docker image digest except on PRs.
