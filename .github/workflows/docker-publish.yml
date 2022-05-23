@@ -80,9 +80,10 @@ jobs:
 
       - name: Container image scan
         uses: Azure/container-scan@v0.1
-        image-name: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}@${{ steps.build-and-push.outputs.digest }}
-        severity-threshold: LOW
-        
+        with:
+          image-name: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}@${{ steps.build-and-push.outputs.digest }}
+          severity-threshold: LOW
+
       # Sign the resulting Docker image digest except on PRs.
       # This will only write to the public Rekor transparency log when the Docker
       # repository is public to avoid leaking data.  If you would like to publish
