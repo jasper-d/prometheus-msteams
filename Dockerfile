@@ -1,13 +1,17 @@
 FROM golang:1.18-bullseye AS build
 
 WORKDIR /build
+
 COPY ./Makefile ./
 COPY ./go.mod ./
 COPY ./go.sum ./
 COPY ./cmd ./cmd
 COPY ./pkg ./pkg
+COPY ./default-message-card.tmpl ./
+COPY ./.git ./.git
 
 RUN make linux
+RUN make test
 
 FROM gcr.io/distroless/static:debug AS debug
 LABEL description="A lightweight Go Web Server that accepts POST alert message from Prometheus Alertmanager and sends it to Microsoft Teams Channels using an incoming webhook url."
