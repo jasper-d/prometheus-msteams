@@ -82,7 +82,7 @@ jobs:
       - name: Print stuff
         run: |
           echo ${{ steps.build-and-push.outputs.digest }}
-          docker image ls --digest
+          docker image ls --digests
 
       - name: Container image scan
         uses: Azure/container-scan@v0.1
