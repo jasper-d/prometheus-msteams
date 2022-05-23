@@ -87,7 +87,7 @@ jobs:
       - name: Container image scan
         uses: Azure/container-scan@v0.1
         with:
-          image-name: ${{ steps.meta.outputs.tags }}
+          image-name: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}@${{ steps.build-and-push.outputs.digest }}
           severity-threshold: LOW
 
       # Sign the resulting Docker image digest except on PRs.
