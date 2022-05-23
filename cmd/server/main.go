@@ -25,13 +25,10 @@ import (
 	"github.com/prometheus-msteams/prometheus-msteams/pkg/version"
 	stdprometheus "github.com/prometheus/client_golang/prometheus"
 
-	"contrib.go.opencensus.io/exporter/jaeger"
 	"go.opencensus.io/plugin/ochttp"
 	"go.opencensus.io/stats/view"
 	"go.opencensus.io/tag"
-	"go.opencensus.io/trace"
-
-	_ "net/http/pprof" //nolint: gosec
+	_ "net/http/pprof" // nolint: gosec
 
 	"github.com/go-kit/kit/log"
 	"github.com/go-kit/kit/log/level"
@@ -86,14 +83,14 @@ func validateWebhook(u string) error {
 }
 
 //nolint:gocyclo
-func main() { //nolint: funlen
+func main() { // nolint: funlen
 	var (
-		fs                            = flag.NewFlagSet("prometheus-msteams", flag.ExitOnError)
-		promVersion                   = fs.Bool("version", false, "Print the version")
-		logFormat                     = fs.String("log-format", "json", "json|fmt")
-		debugLogs                     = fs.Bool("debug", true, "Set log level to debug mode.")
-		jaegerTrace                   = fs.Bool("jaeger-trace", false, "Send traces to Jaeger.")
-		jaegerAgentAddr               = fs.String("jaeger-agent", "localhost:6831", "Jaeger agent endpoint")
+		fs          = flag.NewFlagSet("prometheus-msteams", flag.ExitOnError)
+		promVersion = fs.Bool("version", false, "Print the version")
+		logFormat   = fs.String("log-format", "json", "json|fmt")
+		debugLogs   = fs.Bool("debug", true, "Set log level to debug mode.")
+		// jaegerTrace                   = fs.Bool("jaeger-trace", false, "Send traces to Jaeger.")
+		// jaegerAgentAddr               = fs.String("jaeger-agent", "localhost:6831", "Jaeger agent endpoint")
 		httpAddr                      = fs.String("http-addr", ":2000", "HTTP listen address.")
 		requestURI                    = fs.String("teams-request-uri", "", "The default request URI path where Prometheus will post to.")
 		teamsWebhookURL               = fs.String("teams-incoming-webhook-url", "", "The default Microsoft Teams webhook connector.")
@@ -138,28 +135,28 @@ func main() { //nolint: funlen
 		logger = log.With(logger, "ts", log.DefaultTimestamp, "caller", log.DefaultCaller)
 	}
 
-	// Tracer.
-	if *jaegerTrace {
-		logger.Log("message", "jaeger tracing enabled")
-
-		je, err := jaeger.NewExporter(
-			jaeger.Options{
-				AgentEndpoint: *jaegerAgentAddr,
-				ServiceName:   "prometheus-msteams",
-			},
-		)
-		if err != nil {
-			logger.Log("err", err)
-			os.Exit(1)
-		}
-
-		trace.RegisterExporter(je)
-		trace.ApplyConfig(
-			trace.Config{
-				DefaultSampler: trace.AlwaysSample(),
-			},
-		)
-	}
+	// // Tracer.
+	// if *jaegerTrace {
+	// 	logger.Log("message", "jaeger tracing enabled")
+	//
+	// 	je, err := jaeger.NewExporter(
+	// 		jaeger.Options{
+	// 			AgentEndpoint: *jaegerAgentAddr,
+	// 			ServiceName:   "prometheus-msteams",
+	// 		},
+	// 	)
+	// 	if err != nil {
+	// 		logger.Log("err", err)
+	// 		os.Exit(1)
+	// 	}
+	//
+	// 	trace.RegisterExporter(je)
+	// 	trace.ApplyConfig(
+	// 		trace.Config{
+	// 			DefaultSampler: trace.AlwaysSample(),
+	// 		},
+	// 	)
+	// }
 
 	// Prepare the Teams config.
 	var (
@@ -209,7 +206,7 @@ func main() { //nolint: funlen
 				IdleConnTimeout:       *httpClientIdleConnTimeout,
 				TLSHandshakeTimeout:   *httpClientTLSHandshakeTimeout,
 				ExpectContinueTimeout: 1 * time.Second,
-				TLSClientConfig:       &tls.Config{InsecureSkipVerify: *insecureSkipVerify}, //nolint: gosec
+				TLSClientConfig:       &tls.Config{InsecureSkipVerify: *insecureSkipVerify}, // nolint: gosec
 			},
 		},
 	}
