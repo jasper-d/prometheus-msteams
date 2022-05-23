@@ -67,11 +67,6 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
-      - name: Print tags
-        run: |
-          echo "all tags: ${{ steps.meta.outputs.tags }}"
-          echo "first tag: ${{ steps.meta.outputs.tags[0] }}"
-
       # Build and push Docker image with Buildx (don't push on PR)
       # https://github.com/docker/build-push-action
       - name: Build and push Docker image
@@ -84,10 +79,15 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 
+      - name: Print stuff
+        run: |
+          echo ${{ steps.build-and-push.outputs.digest }}
+          docker image ls --digest
+
       - name: Container image scan
         uses: Azure/container-scan@v0.1
         with:
-          image-name: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}@${{ steps.build-and-push.outputs.digest }}
+          image-name: ${{ steps.build-and-push.outputs.image.name }}
           severity-threshold: LOW
 
       # Sign the resulting Docker image digest except on PRs.
