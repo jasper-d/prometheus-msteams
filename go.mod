@@ -47,4 +47,4 @@ require (
 	k8s.io/helm v2.16.6+incompatible
 )
 
-go 1.13
+go 1.18
