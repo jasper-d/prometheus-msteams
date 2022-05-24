@@ -17,24 +17,23 @@ FROM gcr.io/distroless/static:debug AS debug
 LABEL description="A lightweight Go Web Server that accepts POST alert message from Prometheus Alertmanager and sends it to Microsoft Teams Channels using an incoming webhook url."
 EXPOSE 2000
 
-# Copy required cert and zoneinfo from previous stage
-#COPY --from=certs /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
-COPY --from=build /build/bin/prometheus-msteams-linux-amd64 /promteams
+WORKDIR /app
 
-COPY ./default-message-card.tmpl /default-message-card.tmpl
-#COPY bin/prometheus-msteams-linux-amd64 /promteams
+COPY --from=build /build/bin/prometheus-msteams-linux-amd64 ./promteams
+COPY ./default-message-card.tmpl ./default-message-card.tmpl
 
-ENTRYPOINT ["/promteams"]
+ENTRYPOINT ["/app/promteams"]
 
 FROM gcr.io/distroless/static
 LABEL description="A lightweight Go Web Server that accepts POST alert message from Prometheus Alertmanager and sends it to Microsoft Teams Channels using an incoming webhook url."
+
+USER nonroot:nonroot
+
+WORKDIR /app
+
 EXPOSE 2000
 
-# Copy required cert and zoneinfo from previous stage
-#COPY --from=certs /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
-COPY --from=build /build/bin/prometheus-msteams-linux-amd64 /promteams
+COPY --from=build --chown=nonroot:nonroot /build/bin/prometheus-msteams-linux-amd64 ./promteams
+COPY --chown=nonroot:nonroot ./default-message-card.tmpl ./default-message-card.tmpl
 
-COPY ./default-message-card.tmpl /default-message-card.tmpl
-#COPY bin/prometheus-msteams-linux-amd64 /promteams
-
-ENTRYPOINT ["/promteams"]
+ENTRYPOINT ["/app/promteams"]
