@@ -13,7 +13,7 @@ COPY ./.git ./.git
 RUN make linux
 RUN make test
 
-FROM gcr.io/distroless/static-debian11:debug@sha256:c4762756655b3a9dc9949ad35397102e89a7ac7c815b4e98c3260debd2b2765c AS debug
+FROM gcr.io/distroless/static-debian11:debug@sha256:08ac4c939c472a3b16f7739d98a384c6aa84784abc4f375dbbb50573bd35caec AS debug
 LABEL description="A lightweight Go Web Server that accepts POST alert message from Prometheus Alertmanager and sends it to Microsoft Teams Channels using an incoming webhook url."
 EXPOSE 2000
 
