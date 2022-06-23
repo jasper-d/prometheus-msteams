@@ -5,7 +5,7 @@ require (
 	github.com/go-kit/kit v0.12.0
 	github.com/google/go-cmp v0.5.8
 	github.com/hashicorp/go-retryablehttp v0.7.1
-	github.com/josephburnett/jd v1.5.2
+	github.com/josephburnett/jd v1.6.0
 	github.com/labstack/echo/v4 v4.7.2
 	github.com/oklog/run v1.1.0
 	github.com/peterbourgon/ff v1.7.1
