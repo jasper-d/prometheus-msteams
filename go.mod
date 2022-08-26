@@ -1,7 +1,7 @@
 module github.com/prometheus-msteams/prometheus-msteams
 
 require (
-	contrib.go.opencensus.io/exporter/prometheus v0.4.1
+	contrib.go.opencensus.io/exporter/prometheus v0.4.2
 	github.com/go-kit/kit v0.12.0
 	github.com/google/go-cmp v0.5.8
 	github.com/hashicorp/go-retryablehttp v0.7.1
@@ -11,7 +11,7 @@ require (
 	github.com/peterbourgon/ff v1.7.1
 	github.com/pkg/errors v0.9.1
 	github.com/prometheus/alertmanager v0.24.0
-	github.com/prometheus/client_golang v1.12.2
+	github.com/prometheus/client_golang v1.13.0
 	go.opencensus.io v0.23.0
 	gopkg.in/yaml.v2 v2.4.0
 	k8s.io/helm v2.17.0+incompatible
@@ -64,11 +64,11 @@ require (
 	github.com/mwitkow/go-conntrack v0.0.0-20190716064945-2f068394615f // indirect
 	github.com/oklog/ulid v1.3.1 // indirect
 	github.com/prometheus/client_model v0.2.0 // indirect
-	github.com/prometheus/common v0.34.0 // indirect
+	github.com/prometheus/common v0.37.0 // indirect
 	github.com/prometheus/common/sigv4 v0.1.0 // indirect
 	github.com/prometheus/exporter-toolkit v0.7.1 // indirect
-	github.com/prometheus/procfs v0.7.3 // indirect
-	github.com/prometheus/statsd_exporter v0.22.5 // indirect
+	github.com/prometheus/procfs v0.8.0 // indirect
+	github.com/prometheus/statsd_exporter v0.22.7 // indirect
 	github.com/sean-/seed v0.0.0-20170313163322-e2103e2c3529 // indirect
 	github.com/shurcooL/httpfs v0.0.0-20190707220628-8d4bc4ba7749 // indirect
 	github.com/shurcooL/vfsgen v0.0.0-20200824052919-0d455de96546 // indirect
@@ -78,13 +78,12 @@ require (
 	golang.org/x/mod v0.6.0-dev.0.20220419223038-86c51ed26bb4 // indirect
 	golang.org/x/net v0.0.0-20220520000938-2e3eb7b945c2 // indirect
 	golang.org/x/oauth2 v0.0.0-20220411215720-9780585627b5 // indirect
-	golang.org/x/sync v0.0.0-20220513210516-0976fa681c29 // indirect
-	golang.org/x/sys v0.0.0-20220520151302-bc2c85ada10a // indirect
+	golang.org/x/sys v0.0.0-20220708085239-5a0f0661e09d // indirect
 	golang.org/x/text v0.3.7 // indirect
 	golang.org/x/tools v0.1.10 // indirect
 	golang.org/x/xerrors v0.0.0-20220517211312-f3a8303e98df // indirect
 	google.golang.org/appengine v1.6.7 // indirect
-	google.golang.org/protobuf v1.28.0 // indirect
+	google.golang.org/protobuf v1.28.1 // indirect
 	k8s.io/apimachinery v0.24.0 // indirect
 )
 
