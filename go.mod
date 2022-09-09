@@ -3,7 +3,7 @@ module github.com/prometheus-msteams/prometheus-msteams
 require (
 	contrib.go.opencensus.io/exporter/prometheus v0.4.1
 	github.com/go-kit/kit v0.12.0
-	github.com/google/go-cmp v0.5.8
+	github.com/google/go-cmp v0.5.9
 	github.com/hashicorp/go-retryablehttp v0.7.1
 	github.com/josephburnett/jd v1.5.2
 	github.com/labstack/echo/v4 v4.7.2
